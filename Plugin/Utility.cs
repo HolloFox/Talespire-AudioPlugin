@@ -2,16 +2,30 @@
 using BepInEx.Configuration;
 using System;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace LordAshes
+namespace HolloFox
 {
     public partial class AudioPlugin : BaseUnityPlugin
     {
         public static class Utility
         {
+            public static string CreateMD5(string input)
+            {
+                using (var md5 = MD5.Create())
+                {
+                    var inputBytes = Encoding.ASCII.GetBytes(input);
+                    var hashBytes = md5.ComputeHash(inputBytes);
+                    var sb = new StringBuilder();
+                    for (var i = 0; i < hashBytes.Length; i++) sb.Append(hashBytes[i].ToString("X2"));
+                    return sb.ToString();
+                }
+            }
+
             public static void PostOnMainPage(System.Reflection.MemberInfo plugin)
             {
                 SceneManager.sceneLoaded += (scene, mode) =>
