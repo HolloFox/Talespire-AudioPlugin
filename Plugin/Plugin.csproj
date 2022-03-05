@@ -112,9 +112,6 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>D:\Steam\steamapps\common\TaleSpire\TaleSpire_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>D:\Steam\steamapps\common\TaleSpire\TaleSpire_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
       <HintPath>D:\Steam\steamapps\common\TaleSpire\TaleSpire_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
@@ -138,6 +135,7 @@
   <ItemGroup>
     <Compile Include="Patches\Patches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoftDependency.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Plugin.cs" />
   </ItemGroup>
