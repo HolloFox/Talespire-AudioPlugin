@@ -28,7 +28,7 @@ namespace HolloFox
         // Plugin info
         public const string Name = "Audio Plug-In";
         public const string Guid = "org.hollofox.plugins.audio";
-        public const string Version = "2.0.0.0";
+        public const string Version = "2.0.1.0";
 
         public enum ShareStyle
         {
@@ -97,6 +97,7 @@ namespace HolloFox
                 }
             }
         }
+
         public static void AudioRequestHandler(string action, string identity, string key, object previous, object value)
         {
             switch(key)
@@ -155,7 +156,15 @@ namespace HolloFox
                 };
 
                 if (!Audio.ContainsKey(SubFolder)) { Audio.Add(SubFolder, new Dictionary<NGuid, AudioData>()); }
-                Audio[SubFolder].Add(new NGuid(audio.id), audio);
+                NGuid id = new NGuid(audio.id);
+                if (!Audio[SubFolder].ContainsKey(id))
+                {
+                    Audio[SubFolder].Add(new NGuid(audio.id), audio);
+                }
+                else
+                {
+                    Debug.LogWarning("Audio Plugin: Duplicated Id '"+id.ToString()+"' From '"+Convert.ToString(audio.name)+"' ("+Convert.ToString(audio.source)+")");
+                }
                 if(System.IO.Path.GetExtension(file).ToUpper() == ".WWW") { remoteAudio.Add(audio); }
                 Debug.Log("Audio Plugin: Registered '" + name + "' (" + audio.source + ") in '" + SubFolder + "'");
             }
